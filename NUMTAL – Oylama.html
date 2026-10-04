@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NUMTAL – Oylama</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f2ee;--card:#fbfbf9;--ink:#0d0f12;--mute:#6d6d6b;--line:#e2e0da;--img:#c9c6c0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121212;--card:#1c1c1c;--ink:#f3f2ee;--mute:#9a9893;--line:#2c2c2c;--img:#3a3936}}
+*{box-sizing:border-box;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--ink);font-family:Montserrat,system-ui,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:28px 0 18px;border-bottom:1px solid var(--line)}
+.logo{font-weight:800;font-size:clamp(22px,4vw,30px);letter-spacing:.08em}
+nav{display:flex;gap:clamp(16px,4vw,40px);font-weight:600}
+nav a{color:var(--mute);text-decoration:none;padding-bottom:6px;font-size:15px}
+nav a.on{color:var(--ink);border-bottom:2px solid var(--ink)}
+.btn{background:var(--ink);color:var(--bg);border:0;border-radius:12px;font:600 14px Montserrat,sans-serif;padding:12px 18px;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.btn:focus-visible,nav a:focus-visible{outline:3px solid #7a8cff;outline-offset:2px}
+.hero{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:36px 0 28px}
+.eyebrow{font-size:12px;letter-spacing:.25em;font-weight:600}
+h1{font-size:clamp(28px,5.5vw,44px);font-weight:800;line-height:1.1;margin:10px 0 14px;max-width:12em}
+.hero p{color:var(--mute);line-height:1.5;max-width:30em;font-size:clamp(14px,2vw,16px)}
+.sig{font:italic 700 clamp(18px,3vw,26px) Montserrat,sans-serif;transform:rotate(-8deg);border-bottom:2px solid var(--ink);padding-bottom:2px;margin-top:20px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(12px,2.5vw,26px)}
+@media (min-width:900px){.grid{grid-template-columns:repeat(4,1fr)}}
+.card{background:var(--card);border-radius:16px;overflow:hidden}
+.pic{position:relative;aspect-ratio:1/0.93;background:var(--img);display:grid;place-items:center}
+.pic>b{position:absolute;top:14px;left:16px;font-size:14px;font-weight:600;color:#111}
+.pic svg{width:86%;height:auto}
+.info{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;padding:16px}
+.info h2{font-size:clamp(14px,2vw,16px);font-weight:700}
+.cnt{color:var(--mute);font-size:14px;display:flex;gap:6px;align-items:center;margin-top:6px}
+.btn.voted{background:#1f7a4d;color:#fff}
+footer{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:28px 0 36px;font-size:11px;letter-spacing:.2em}
+footer span{color:var(--mute);display:flex;align-items:center;gap:12px}
+footer i{width:48px;height:1px;background:var(--mute)}
+@media (max-width:480px){nav{display:none}.hero{flex-direction:column}.sig{margin-top:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="logo">NUMTAL</div>
+  <nav><a class="on" href="#">Oylama</a><a href="#">Sipariş</a></nav>
+  <button class="btn">Kayıt Ol</button>
+</header>
+<section class="hero">
+  <div>
+    <div class="eyebrow">SENİN TARZIN, SENİN OYUN</div>
+    <h1>En Sevdiğin Tasarımı Seç!</h1>
+    <p>Aşağıdaki tişört tasarımlarını incele ve favorini oyla. En çok oy alan tasarım, üretime girecek!</p>
+  </div>
+  <div class="sig">NUMTAL</div>
+</section>
+<main class="grid" id="grid"></main>
+<footer><b>NUMTAL</b><span><i></i>DAHA FAZLASI YAKINDA</span></footer>
+</div>
+<script>
+const shirt=(c,art,txt)=>`<svg viewBox="0 0 200 200" aria-hidden="true"><path d="M70 22 L30 40 L10 82 L38 94 L48 78 L48 182 L152 182 L152 78 L162 94 L190 82 L170 40 L130 22 Q100 40 70 22Z" fill="${c}" stroke="rgba(0,0,0,.25)"/><g stroke="${txt}" fill="none" stroke-width="1.2">${art}</g><text x="100" y="150" text-anchor="middle" font-size="9" letter-spacing="2" fill="${txt}" font-family="Montserrat,sans-serif">NUMTAL</text></svg>`;
+const star=(y,r)=>`<path d="M100 ${y-r}L102 ${y-2}L${100+r} ${y}L102 ${y+2}L100 ${y+r}L98 ${y+2}L${100-r} ${y}L98 ${y-2}Z" fill="currentColor"/>`;
+const items=[
+ {n:'Tasarım 1',v:248,s:shirt('#15161a',`<g stroke="#ddd"><path d="M100 60V120M72 75L128 105M72 105L128 75"/><circle cx="100" cy="90" r="20"/></g>`,'#e8e6e1')},
+ {n:'Tasarım 2',v:176,s:shirt('#f1efe8',`<path d="M100 48l2 6-2 6-2-6z" fill="#111"/><rect x="72" y="66" width="56" height="48" fill="#444"/><path d="M72 114L92 84l12 16 10-20 14 34z" fill="#ddd"/>`,'#111')},
+ {n:'Tasarım 3',v:132,s:shirt('#2c2c2c',`<g stroke="#ccc"><circle cx="100" cy="95" r="26"/><ellipse cx="100" cy="95" rx="12" ry="26"/><path d="M74 95H126M78 82H122M78 108H122"/></g>`,'#ddd')},
+ {n:'Tasarım 4',v:201,s:shirt('#111214',`<path d="M100 44l2 6-2 6-2-6z" fill="#fff"/><circle cx="100" cy="92" r="22" fill="#cfcfcf"/><path d="M82 90h36M100 80v22M86 112q14 14 28 0" stroke="#222"/>`,'#e8e6e1')}
+];
+const icon='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11v9H4v-9zM7 11l4-8c2 0 3 1 3 3v3h5a2 2 0 0 1 2 2l-1 7a2 2 0 0 1-2 2H7"/></svg>';
+const users='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-4 3-6 7-6s7 2 7 6M16 4.5a3.5 3.5 0 0 1 0 7M18 14c2.5.6 4 2.4 4 6"/></svg>';
+const grid=document.getElementById('grid');
+let voted=null;
+function render(){
+ grid.innerHTML=items.map((t,i)=>`<article class="card"><div class="pic" style="color:#fff"><b>0${i+1}</b>${t.s}</div><div class="info"><div><h2>${t.n}</h2><div class="cnt">${users}<span>${t.v+(voted===i?1:0)} oy</span></div></div><button class="btn ${voted===i?'voted':''}" data-i="${i}">${icon}${voted===i?'Oy Verildi':'Oy Ver'}</button></div></article>`).join('');
+}
+grid.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const i=+b.dataset.i;voted=voted===i?null:i;render()});
+render();
+</script>
+</body>
+</html>
